@@ -1,4 +1,4 @@
-package br.org.eldorado.millelds.ui
+package br.org.eldorado.millelds
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

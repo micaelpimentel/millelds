@@ -3,6 +3,7 @@ package br.org.eldorado.millelds
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.org.eldorado.millelds.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy {
@@ -17,6 +18,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        binding.button.
+        binding.button.setOnClickListener {
+            Snackbar.make(
+                binding.root,
+                "Clicou no botao",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
     }
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Millelds</string>
+    <string name="product_price">R$ %s</string>
 </resources>

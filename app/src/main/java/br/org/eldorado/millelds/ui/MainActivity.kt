@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.org.eldorado.millelds.databinding.ActivityMainBinding
 import br.org.eldorado.millelds.model.Product
-import br.org.eldorado.millelds.ui.adapter.ListAdapter
+import br.org.eldorado.millelds.ui.adapter.ProductListAdapter
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViews() {
 
-        binding.recyclerView.adapter = ListAdapter(this, productLit)
+        binding.recyclerView.adapter = ProductListAdapter(productLit)
 
         binding.button.setOnClickListener {
             Snackbar.make(

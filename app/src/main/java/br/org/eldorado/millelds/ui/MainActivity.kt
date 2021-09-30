@@ -2,6 +2,7 @@ package br.org.eldorado.millelds.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import br.org.eldorado.millelds.dao.ProductDAO
 import br.org.eldorado.millelds.databinding.ActivityMainBinding
 import br.org.eldorado.millelds.model.Product
 import br.org.eldorado.millelds.ui.adapter.ProductListAdapter
@@ -12,26 +13,6 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    val productLit = listOf(
-        Product(
-            name = "Cesta de frutas 1",
-            description = "Cesta básica padrão",
-            price = "19.00".toBigDecimal()
-        ),
-        Product(
-            name = "Cesta de frutas 2",
-            price = "39.00".toBigDecimal()
-        ),
-        Product(
-            name = "Cesta de frutas 3",
-            price = "49.00".toBigDecimal()
-        ),
-        Product(
-            name = "Mega Cesta de frutas",
-            price = "69.90".toBigDecimal()
-        ),
-    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -41,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViews() {
 
-        binding.recyclerView.adapter = ProductListAdapter(productLit)
+        binding.recyclerView.adapter = ProductListAdapter(ProductDAO().getAll())
 
         binding.button.setOnClickListener {
             Snackbar.make(

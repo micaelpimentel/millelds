@@ -1,5 +1,6 @@
 package br.org.eldorado.millelds.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.org.eldorado.millelds.R
@@ -25,11 +26,7 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = ProductListAdapter(ProductDAO().getAll())
 
         binding.button.setOnClickListener {
-            Snackbar.make(
-                binding.root,
-                getString(R.string.clicked_button),
-                Snackbar.LENGTH_SHORT
-            ).show()
+            startActivity(Intent(this,ProductAddActivity::class.java))
         }
     }
 }

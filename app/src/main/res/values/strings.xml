@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Millelds</string>
+    <string name="product_price">R$ %s</string>
+    <string name="clicked_button">Clicou no botão</string>
+    <string name="click_here">Clique aqui</string>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/recyclerViewConstraint"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:background="@drawable/button_background"
-        android:text="Click here"
+        android:text="@string/click_here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

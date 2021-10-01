@@ -30,12 +30,9 @@ class ProductAddActivity : AppCompatActivity() {
                     name = name,
                     description = description,
                     price = price.toBigDecimal()
-                ).let {
-                    Log.d("MICAEL", "$it")
+                ).also {
                     ProductDAO().add(it)
                 }
-                Log.d("MICAEL", ProductDAO().getAll().toString())
-
                 finish()
             }
         }

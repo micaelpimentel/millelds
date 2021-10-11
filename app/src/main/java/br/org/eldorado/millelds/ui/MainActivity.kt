@@ -32,12 +32,12 @@ class MainActivity : AppCompatActivity() {
     private fun updateProductList() {
         productList.clear()
         productList.addAll(ProductDAO().getAll().toMutableList())
-        binding.recyclerView.adapter?.notifyItemInserted(productList.lastIndex)
+        binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 
     private fun setupViews() {
         binding.recyclerView.adapter = ProductListAdapter(productList)
-        binding.button.setOnClickListener {
+        binding.floatingActionButton.setOnClickListener {
             startActivity(Intent(this,ProductAddActivity::class.java))
         }
     }

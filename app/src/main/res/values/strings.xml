@@ -3,7 +3,7 @@
     <string name="product_price">R$ %s</string>
     <string name="clicked_button">Clicou no botão</string>
     <string name="click_here">Clique aqui</string>
-    <string name="product_name">Nome to produto</string>
+    <string name="product_name">Nome do produto</string>
     <string name="product_description">Descrição</string>
     <string name="price">Preço</string>
     <string name="register_product">Cadastrar produto</string>

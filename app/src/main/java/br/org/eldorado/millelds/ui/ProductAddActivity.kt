@@ -1,14 +1,11 @@
 package br.org.eldorado.millelds.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.annotation.NonNull
+import androidx.appcompat.app.AppCompatActivity
 import br.org.eldorado.millelds.dao.ProductDAO
 import br.org.eldorado.millelds.databinding.ActivityProductAddBinding
 import br.org.eldorado.millelds.model.Product
 import com.google.android.material.snackbar.Snackbar
-import java.math.BigDecimal
 
 class ProductAddActivity : AppCompatActivity() {
     private val binding by lazy {

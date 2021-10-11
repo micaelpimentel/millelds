@@ -1,11 +1,11 @@
 package br.org.eldorado.millelds.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
-import br.org.eldorado.millelds.R
 import br.org.eldorado.millelds.databinding.ListItemBinding
+import br.org.eldorado.millelds.extensions.tryLoadImage
 import br.org.eldorado.millelds.model.Product
 import java.math.BigDecimal
 import java.text.NumberFormat
@@ -22,6 +22,16 @@ class ProductListAdapter(
                 productNameTextView.text = product.name
                 productDescriptionTextView.text = product.description ?: ""
                 productPriceTextView.text = formatCurrencyToBr(product.price)
+                setupProductImage(product.imageUrl)
+            }
+        }
+
+        private fun setupProductImage(imageUrl: String?) {
+            if (imageUrl != null) {
+                listItemBinding.productImageView.visibility = View.VISIBLE
+                listItemBinding.productImageView.tryLoadImage(imageUrl)
+            } else {
+                listItemBinding.productImageView.visibility = View.GONE
             }
         }
 

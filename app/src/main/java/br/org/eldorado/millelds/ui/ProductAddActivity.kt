@@ -55,7 +55,8 @@ class ProductAddActivity : AppCompatActivity() {
             return Product(
                 name = name,
                 description = description,
-                price = price
+                price = price,
+                imageUrl = url
             )
         }
     }

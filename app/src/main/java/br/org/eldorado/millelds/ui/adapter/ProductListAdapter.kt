@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import br.org.eldorado.millelds.R
 import br.org.eldorado.millelds.databinding.ListItemBinding
 import br.org.eldorado.millelds.model.Product
+import java.math.BigDecimal
+import java.text.NumberFormat
+import java.util.*
 
 class ProductListAdapter(
     private val productList: List<Product>
@@ -18,11 +21,13 @@ class ProductListAdapter(
             with(listItemBinding) {
                 productNameTextView.text = product.name
                 productDescriptionTextView.text = product.description ?: ""
-                productPriceTextView.text = itemView.context.getString(
-                    R.string.product_price,
-                    product.price.toPlainString()
-                )
+                productPriceTextView.text = formatCurrencyToBr(product.price)
             }
+        }
+
+        fun formatCurrencyToBr(price: BigDecimal): String {
+            val formatter = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
+            return formatter.format(price)
         }
     }
 

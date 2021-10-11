@@ -12,12 +12,22 @@ import java.text.NumberFormat
 import java.util.*
 
 class ProductListAdapter(
-    private val productList: List<Product>
+    private val productList: List<Product>,
+    var onItemClickListener: (Product) -> Unit = {}
 ) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
-    class ViewHolder(val listItemBinding: ListItemBinding) :
+    inner class ViewHolder(val listItemBinding: ListItemBinding) :
         RecyclerView.ViewHolder(listItemBinding.root) {
+
+        private lateinit var product: Product
+
+        init {
+            itemView.setOnClickListener {
+                onItemClickListener(product)
+            }
+        }
         fun bind(product: Product) {
+            this.product = product
             with(listItemBinding) {
                 productNameTextView.text = product.name
                 productDescriptionTextView.text = product.description ?: ""

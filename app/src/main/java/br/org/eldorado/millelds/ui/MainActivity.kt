@@ -2,14 +2,10 @@ package br.org.eldorado.millelds.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import br.org.eldorado.millelds.R
 import br.org.eldorado.millelds.dao.ProductDAO
 import br.org.eldorado.millelds.databinding.ActivityMainBinding
-import br.org.eldorado.millelds.model.Product
 import br.org.eldorado.millelds.ui.adapter.ProductListAdapter
-import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy {

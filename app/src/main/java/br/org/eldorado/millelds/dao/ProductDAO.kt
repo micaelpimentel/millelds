@@ -11,16 +11,23 @@ class ProductDAO {
                 price = "19.00".toBigDecimal()
             ),
             Product(
-                name = "Cesta de frutas 2",
-                price = "39.00".toBigDecimal()
+                name = "Tucumã",
+                description = "Porção de tucumã com casca.\n" +
+                        "Aproximadamente 500 gramas",
+                price = "16.00".toBigDecimal(),
+                imageUrl = "https://cdn.emtempo.com.br/img/inline/200000/680/468320848712f349ea0fez_00208579_8_202105141127.webp"
             ),
             Product(
-                name = "Cesta de frutas 3",
-                price = "49.00".toBigDecimal()
+                name = "Frutas vermelhas",
+                description = "Proção de frutas vermelhas selecionadas. Excelentes para preparar aquela vitaminada ou receita especial incrível.",
+                price = "39.00".toBigDecimal(),
+                imageUrl = "https://conteudo.imguol.com.br/c/entretenimento/80/2017/10/26/frutas-vermelhas-1509051642985_v2_600x600.jpg"
             ),
             Product(
-                name = "Mega Cesta de frutas",
-                price = "69.90".toBigDecimal()
+                name = "Frutas cítricas",
+                description = "Cesta com 3 varieadades de frutas cítircas. Ajudam na desintoxicação do organismo e estimulam o sistema imunológico",
+                price = "12.90".toBigDecimal(),
+                imageUrl = "https://static1.conquistesuavida.com.br/articles//2/72/22/@/23017-as-frutas-citricas-sao-caracterizadas-pe-article_gallery-3.jpg"
             ),
         )
     }

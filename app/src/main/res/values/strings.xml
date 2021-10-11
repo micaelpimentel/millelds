@@ -7,4 +7,6 @@
     <string name="product_description">Descrição</string>
     <string name="price">Preço</string>
     <string name="register_product">Cadastrar produto</string>
+    <string name="load">Carregar</string>
+    <string name="image_url">URL da imagem</string>
 </resources>

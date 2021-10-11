@@ -40,6 +40,10 @@ class MainActivity : AppCompatActivity() {
                     "Clicked product ${product.name}",
                     Snackbar.LENGTH_SHORT
                 ).show()
+                val intent = Intent(this@MainActivity, ProductDetailActivity::class.java).apply {
+                    putExtra(PRODUCT_TAG, product)
+                }
+                startActivity(intent)
             }
         }
 

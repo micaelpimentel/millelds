@@ -34,5 +34,7 @@ class ProductDAO {
 
     fun add(product: Product) = products.add(product)
 
+    fun get(position: Int) = products[position]
+
     fun getAll() = products.toList()
 }

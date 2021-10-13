@@ -71,7 +71,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-
+                val position = viewHolder.adapterPosition
+                ProductDAO().remove(position)
+                productList.removeAt(position)
+                binding.recyclerView.adapter?.notifyItemRemoved(position)
             }
         })
 

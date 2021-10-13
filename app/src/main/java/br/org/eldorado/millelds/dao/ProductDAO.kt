@@ -37,4 +37,6 @@ class ProductDAO {
     fun get(position: Int) = products[position]
 
     fun getAll() = products.toList()
+
+    fun remove(index: Int) = products.removeAt(index)
 }

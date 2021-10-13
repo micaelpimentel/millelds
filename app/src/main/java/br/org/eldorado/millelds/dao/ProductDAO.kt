@@ -1,6 +1,7 @@
 package br.org.eldorado.millelds.dao
 
 import br.org.eldorado.millelds.model.Product
+import java.util.*
 
 class ProductDAO {
     companion object {
@@ -39,4 +40,6 @@ class ProductDAO {
     fun getAll() = products.toList()
 
     fun remove(index: Int) = products.removeAt(index)
+
+    fun swap(inicial: Int, final: Int) = Collections.swap(products, inicial, final)
 }

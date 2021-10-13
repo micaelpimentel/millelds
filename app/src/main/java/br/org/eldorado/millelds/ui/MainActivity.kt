@@ -10,8 +10,7 @@ import br.org.eldorado.millelds.databinding.ActivityMainBinding
 import br.org.eldorado.millelds.ui.adapter.ProductListAdapter
 import com.google.android.material.snackbar.Snackbar
 import androidx.recyclerview.widget.ItemTouchHelper.Callback.makeMovementFlags
-
-
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -59,7 +58,8 @@ class MainActivity : AppCompatActivity() {
                 viewHolder: RecyclerView.ViewHolder
             ): Int {
                 val swipeFlags = ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT
-                return makeMovementFlags(0, swipeFlags)
+                val dragFlags = ItemTouchHelper.DOWN or ItemTouchHelper.UP
+                return makeMovementFlags(dragFlags, swipeFlags)
             }
 
             override fun onMove(
@@ -67,7 +67,12 @@ class MainActivity : AppCompatActivity() {
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                return false
+                val startingPosition = viewHolder.adapterPosition
+                val endingPosition = target.adapterPosition
+                ProductDAO().swap(startingPosition, endingPosition)
+                Collections.swap(productList, startingPosition, endingPosition)
+                binding.recyclerView.adapter?.notifyItemMoved(startingPosition, endingPosition)
+                return true
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {

@@ -2,6 +2,7 @@ package br.org.eldorado.millelds.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import br.org.eldorado.millelds.R
 import br.org.eldorado.millelds.dao.ProductDAO
 import br.org.eldorado.millelds.databinding.ActivityProductAddBinding
 import br.org.eldorado.millelds.extensions.tryLoadImage
@@ -20,6 +21,7 @@ class ProductAddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        title = getString(R.string.new_product)
         setupButton()
         setupImage()
     }

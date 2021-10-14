@@ -35,12 +35,10 @@ class MainActivity : AppCompatActivity() {
     private fun setupViews() {
         binding.recyclerView.adapter = ProductListAdapter(productList).apply {
             onItemClickListener = { product ->
-                Snackbar.make(
-                    binding.root,
-                    "Clicked product ${product.name}",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-                val intent = Intent(this@MainActivity, ProductDetailActivity::class.java).apply {
+                val intent = Intent(
+                    this@MainActivity,
+                    ProductDetailActivity::class.java
+                ).apply {
                     putExtra(PRODUCT_TAG, product)
                 }
                 startActivity(intent)

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import br.org.eldorado.millelds.dao.ProductDAO
 import br.org.eldorado.millelds.databinding.ActivityMainBinding
 import br.org.eldorado.millelds.ui.adapter.ProductListAdapter
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy {
@@ -32,7 +33,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        binding.recyclerView.adapter = ProductListAdapter(productList)
+        binding.recyclerView.adapter = ProductListAdapter(productList).apply {
+            onItemClickListener = { product ->
+                val intent = Intent(
+                    this@MainActivity,
+                    ProductDetailActivity::class.java
+                ).apply {
+                    putExtra(PRODUCT_TAG, product)
+                }
+                startActivity(intent)
+            }
+        }
+
+
         binding.floatingActionButton.setOnClickListener {
             startActivity(Intent(this,ProductAddActivity::class.java))
         }

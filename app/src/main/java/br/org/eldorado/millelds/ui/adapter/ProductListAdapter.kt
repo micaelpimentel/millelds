@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.org.eldorado.millelds.databinding.ListItemBinding
+import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.extensions.tryLoadImage
 import br.org.eldorado.millelds.model.Product
 import java.math.BigDecimal
@@ -12,16 +13,26 @@ import java.text.NumberFormat
 import java.util.*
 
 class ProductListAdapter(
-    private val productList: List<Product>
+    private val productList: List<Product>,
+    var onItemClickListener: (Product) -> Unit = {}
 ) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
-    class ViewHolder(val listItemBinding: ListItemBinding) :
+    inner class ViewHolder(val listItemBinding: ListItemBinding) :
         RecyclerView.ViewHolder(listItemBinding.root) {
+
+        private lateinit var product: Product
+
+        init {
+            itemView.setOnClickListener {
+                onItemClickListener(product)
+            }
+        }
         fun bind(product: Product) {
+            this.product = product
             with(listItemBinding) {
                 productNameTextView.text = product.name
                 productDescriptionTextView.text = product.description ?: ""
-                productPriceTextView.text = formatCurrencyToBr(product.price)
+                productPriceTextView.text = product.price.formatCurrencyToBr()
                 setupProductImage(product.imageUrl)
             }
         }
@@ -33,11 +44,6 @@ class ProductListAdapter(
             } else {
                 listItemBinding.productImageView.visibility = View.GONE
             }
-        }
-
-        fun formatCurrencyToBr(price: BigDecimal): String {
-            val formatter = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
-            return formatter.format(price)
         }
     }
 

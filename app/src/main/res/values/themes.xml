@@ -16,4 +16,8 @@
     <style name="TelaCheia" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:windowFullscreen">true</item>
     </style>
+    <style name="NoActionBar" parent="Theme.Millelds">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

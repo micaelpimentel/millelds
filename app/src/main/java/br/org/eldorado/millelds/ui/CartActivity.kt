@@ -1,6 +1,9 @@
 package br.org.eldorado.millelds.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import br.org.eldorado.millelds.R
@@ -8,6 +11,7 @@ import br.org.eldorado.millelds.dao.CartDAO
 import br.org.eldorado.millelds.databinding.ActivityCartBinding
 import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.ui.adapter.CartListAdapter
+import com.google.android.material.snackbar.Snackbar
 
 class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
     private val binding by lazy {
@@ -24,14 +28,46 @@ class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
     }
 
     private fun setUpViews() {
-        with(binding) {
-            if (!checkCartIsEmpty()) {
-                cartListRecyclerView.apply {
-                    adapter = CartListAdapter(cartItems, this@CartActivity)
-                }
+        setupCartList()
+        setupTotalPrice()
+    }
+
+    private fun setupCartList() {
+        if (!checkCartIsEmpty()) {
+            binding.cartListRecyclerView.apply {
+                adapter = CartListAdapter(cartItems, this@CartActivity)
             }
         }
-        setupTotalPrice()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.cart_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.compleOrderItem -> {
+                completeOrder()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun completeOrder() {
+        if (!checkCartIsEmpty()){
+            val intent = Intent(this, OrderCompletedActivity::class.java)
+            startActivity(intent)
+            CartDAO().removeAll()
+            finish()
+        } else {
+            Snackbar.make(
+                binding.root,
+                "Seu carrinho está vazio",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
     }
 
     fun checkCartIsEmpty(): Boolean {

@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Millelds">
         <activity
+            android:name=".ui.OrderCompletedActivity"
+            android:exported="true"
+            android:theme="@style/NoActionBar" />
+        <activity
             android:name=".ui.CartActivity"
             android:exported="true" />
         <activity

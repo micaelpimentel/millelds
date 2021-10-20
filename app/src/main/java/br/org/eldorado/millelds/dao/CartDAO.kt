@@ -36,5 +36,7 @@ class CartDAO {
 
     fun remove(index: Int) = cartItems.removeAt(index)
 
+    fun removeAll() = cartItems.clear()
+
     fun swap(inicial: Int, final: Int) = Collections.swap(cartItems, inicial, final)
 }

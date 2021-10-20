@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.org.eldorado.millelds.dao.CartDAO
 import br.org.eldorado.millelds.databinding.ActivityCartBinding
+import br.org.eldorado.millelds.ui.adapter.CartListAdapter
 
 class CartActivity : AppCompatActivity() {
     private val binding by lazy {
@@ -25,8 +27,11 @@ class CartActivity : AppCompatActivity() {
             if (cartItems.isNullOrEmpty()) {
                 cartListConstraint.visibility = View.GONE
                 emptyCartConstraint.visibility = View.VISIBLE
+            } else {
+                cartListRecyclerView.apply {
+                    adapter = CartListAdapter(cartItems)
+                }
             }
-            Log.d("MICAEL", "setup Views")
         }
     }
 }

@@ -50,6 +50,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val itemTouchHelper = setupItemTouchHelper()
+
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+
+        binding.floatingActionButton.setOnClickListener {
+            startActivity(Intent(this,ProductAddActivity::class.java))
+        }
+    }
+
+    private fun setupItemTouchHelper(): ItemTouchHelper {
         val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
             override fun getMovementFlags(
                 recyclerView: RecyclerView,
@@ -80,11 +90,6 @@ class MainActivity : AppCompatActivity() {
                 binding.recyclerView.adapter?.notifyItemRemoved(position)
             }
         })
-
-        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
-
-        binding.floatingActionButton.setOnClickListener {
-            startActivity(Intent(this,ProductAddActivity::class.java))
-        }
+        return itemTouchHelper
     }
 }

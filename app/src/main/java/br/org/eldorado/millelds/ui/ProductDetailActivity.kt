@@ -7,6 +7,7 @@ import br.org.eldorado.millelds.databinding.ActivityProductDetailBinding
 import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.extensions.tryLoadImage
 import br.org.eldorado.millelds.model.Product
+import com.google.android.material.snackbar.Snackbar
 
 const val PRODUCT_TAG = "product_tag"
 
@@ -33,6 +34,17 @@ class ProductDetailActivity : AppCompatActivity() {
             productDescriptionTextView.text = product.description
             productImageView.tryLoadImage(product.imageUrl)
             productPriceTextView.text = product.price.formatCurrencyToBr()
+        }
+        setupFab(product)
+    }
+
+    private fun setupFab(product: Product) {
+        binding.floatingActionButton.setOnClickListener {
+            Snackbar.make(
+                binding.root,
+                "${product.name} adicionado ao carrinho",
+                Snackbar.LENGTH_SHORT
+            ).show()
         }
     }
 

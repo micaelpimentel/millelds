@@ -3,12 +3,13 @@ package br.org.eldorado.millelds.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import br.org.eldorado.millelds.dao.CartDAO
 import br.org.eldorado.millelds.databinding.CartItemBinding
 import br.org.eldorado.millelds.extensions.setupProductImage
 import br.org.eldorado.millelds.model.CartItem
 
 class CartListAdapter(
-    private val cartList: List<CartItem>,
+    private val cartList: MutableList<CartItem>,
     val updateTotal: UpdateTotalPrice
 ) : RecyclerView.Adapter<CartListAdapter.ViewHolder>() {
 
@@ -48,6 +49,11 @@ class CartListAdapter(
             itemBinding.amountCounter.setText(amount.toString())
             cartItem.amount = amount
             itemBinding.productPriceTextView.text = cartItem.getSubTotal()
+            if (amount == 0) {
+                cartList.removeAt(adapterPosition)
+                CartDAO().remove(adapterPosition)
+                notifyItemRemoved(adapterPosition)
+            }
             updateTotal.updateTotalPriceTextView()
         }
 

@@ -8,7 +8,6 @@ import br.org.eldorado.millelds.dao.CartDAO
 import br.org.eldorado.millelds.databinding.ActivityCartBinding
 import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.ui.adapter.CartListAdapter
-import java.math.BigDecimal
 
 class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
     private val binding by lazy {
@@ -26,16 +25,26 @@ class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
 
     private fun setUpViews() {
         with(binding) {
-            if (cartItems.isNullOrEmpty()) {
-                cartListConstraint.visibility = View.GONE
-                emptyCartConstraint.visibility = View.VISIBLE
-            } else {
+            if (!checkCartIsEmpty()) {
                 cartListRecyclerView.apply {
                     adapter = CartListAdapter(cartItems, this@CartActivity)
                 }
             }
         }
         setupTotalPrice()
+    }
+
+    fun checkCartIsEmpty(): Boolean {
+        if (cartItems.isNullOrEmpty()) {
+            binding.showEmptyMessage()
+            return true
+        }
+        return false
+    }
+
+    private fun ActivityCartBinding.showEmptyMessage() {
+        cartListConstraint.visibility = View.GONE
+        emptyCartConstraint.visibility = View.VISIBLE
     }
 
     private fun setupTotalPrice() {
@@ -49,5 +58,6 @@ class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
 
     override fun updateTotalPriceTextView() {
         setupTotalPrice()
+        checkCartIsEmpty()
     }
 }

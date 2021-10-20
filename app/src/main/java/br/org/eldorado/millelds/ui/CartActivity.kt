@@ -10,7 +10,7 @@ import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.ui.adapter.CartListAdapter
 import java.math.BigDecimal
 
-class CartActivity : AppCompatActivity() {
+class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
     private val binding by lazy {
         ActivityCartBinding.inflate(layoutInflater)
     }
@@ -31,7 +31,7 @@ class CartActivity : AppCompatActivity() {
                 emptyCartConstraint.visibility = View.VISIBLE
             } else {
                 cartListRecyclerView.apply {
-                    adapter = CartListAdapter(cartItems)
+                    adapter = CartListAdapter(cartItems, this@CartActivity)
                 }
             }
         }
@@ -45,5 +45,9 @@ class CartActivity : AppCompatActivity() {
 
         binding.totalPriceTextView.text =
             getString(R.string.total_cart_price, price)
+    }
+
+    override fun updateTotalPriceTextView() {
+        setupTotalPrice()
     }
 }

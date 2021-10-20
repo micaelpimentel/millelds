@@ -9,7 +9,12 @@ import br.org.eldorado.millelds.model.CartItem
 
 class CartListAdapter(
     private val cartList: List<CartItem>,
+    val updateTotal: UpdateTotalPrice
 ) : RecyclerView.Adapter<CartListAdapter.ViewHolder>() {
+
+    interface UpdateTotalPrice {
+        fun updateTotalPriceTextView()
+    }
 
     inner class ViewHolder(val itemBinding: CartItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
@@ -43,6 +48,7 @@ class CartListAdapter(
             itemBinding.amountCounter.setText(amount.toString())
             cartItem.amount = amount
             itemBinding.productPriceTextView.text = cartItem.getSubTotal()
+            updateTotal.updateTotalPriceTextView()
         }
 
     }

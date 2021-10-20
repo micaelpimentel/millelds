@@ -9,9 +9,26 @@ class CartDAO {
         private val cartItems = mutableListOf<CartItem>()
     }
 
-    fun add(product: Product) = cartItems.add(CartItem(product))
+    fun add(product: Product) {
+        val foundIndex = cartItems.indexOf(product)
+        if (foundIndex != -1) {
+            cartItems[foundIndex].amount += 1
+        } else
+            cartItems.add(CartItem(product))
+    }
 
-    fun add(item: CartItem) = cartItems.add(item)
+    private fun MutableList<CartItem>.indexOf(product: Product) =
+        this.indexOfFirst {
+            it.product == product
+        }
+
+    fun add(item: CartItem) {
+        val foundIndex = cartItems.indexOf(item.product)
+        if (foundIndex != -1) {
+            cartItems[foundIndex].amount += 1
+        } else
+            cartItems.add(item)
+    }
 
     fun get(position: Int) = cartItems[position]
 

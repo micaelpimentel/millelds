@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import br.org.eldorado.millelds.R
 import br.org.eldorado.millelds.dao.CartDAO
 import br.org.eldorado.millelds.databinding.ActivityCartBinding
 import br.org.eldorado.millelds.ui.adapter.CartListAdapter
@@ -19,6 +20,7 @@ class CartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        title = getString(R.string.cart)
         setUpViews()
     }
 

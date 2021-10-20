@@ -39,7 +39,7 @@
                 android:textSize="28sp"
                 android:fontFamily="@font/montserrat"
                 android:textStyle="bold"
-                tools:text="Total: R$ 20,03"
+                android:text="@string/total_cart_price"
                 android:textColor="@color/teal_700"
                 app:layout_constraintVertical_bias="1"
                 app:layout_constraintStart_toStartOf="parent"

@@ -12,4 +12,5 @@
     <string name="new_product">Novo produto</string>
     <string name="cart">Carrinho</string>
     <string name="seu_carrinho_est_vazio">Seu carrinho está vazio</string>
+    <string name="total_cart_price">Total: %s</string>
 </resources>

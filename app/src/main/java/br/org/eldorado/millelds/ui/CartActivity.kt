@@ -1,14 +1,14 @@
 package br.org.eldorado.millelds.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import br.org.eldorado.millelds.R
 import br.org.eldorado.millelds.dao.CartDAO
 import br.org.eldorado.millelds.databinding.ActivityCartBinding
+import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.ui.adapter.CartListAdapter
+import java.math.BigDecimal
 
 class CartActivity : AppCompatActivity() {
     private val binding by lazy {
@@ -35,5 +35,15 @@ class CartActivity : AppCompatActivity() {
                 }
             }
         }
+        setupTotalPrice()
+    }
+
+    private fun setupTotalPrice() {
+        val price = cartItems.sumOf {
+            it.product.price * it.amount.toBigDecimal()
+        }.formatCurrencyToBr()
+
+        binding.totalPriceTextView.text =
+            getString(R.string.total_cart_price, price)
     }
 }

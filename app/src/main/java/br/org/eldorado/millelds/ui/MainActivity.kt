@@ -2,6 +2,8 @@ package br.org.eldorado.millelds.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +12,7 @@ import br.org.eldorado.millelds.databinding.ActivityMainBinding
 import br.org.eldorado.millelds.ui.adapter.ProductListAdapter
 import com.google.android.material.snackbar.Snackbar
 import androidx.recyclerview.widget.ItemTouchHelper.Callback.makeMovementFlags
+import br.org.eldorado.millelds.R
 import java.util.*
 
 
@@ -29,6 +32,26 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         updateProductList()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.shoppingCartItem -> {
+                openShoppingCart()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun openShoppingCart() {
+        val intent = Intent(this, CartActivity::class.java)
+        startActivity(intent)
     }
 
     private fun updateProductList() {

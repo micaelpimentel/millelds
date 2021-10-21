@@ -7,5 +7,5 @@ data class CartItem(
     val product: Product,
     var amount: Int = 1
 ) {
-    fun getSubTotal(): String = (product.price * amount.toBigDecimal()).formatCurrencyToBr()
+    fun getSubTotal(): BigDecimal = product.price * amount.toBigDecimal()
 }

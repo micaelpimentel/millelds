@@ -7,12 +7,10 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import br.org.eldorado.millelds.R
 import br.org.eldorado.millelds.dao.ProductDAO
 import br.org.eldorado.millelds.databinding.ActivityMainBinding
 import br.org.eldorado.millelds.ui.adapter.ProductListAdapter
-import com.google.android.material.snackbar.Snackbar
-import androidx.recyclerview.widget.ItemTouchHelper.Callback.makeMovementFlags
-import br.org.eldorado.millelds.R
 import java.util.*
 
 

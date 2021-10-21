@@ -8,10 +8,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import br.org.eldorado.millelds.R
 import br.org.eldorado.millelds.dao.CartDAO
+import br.org.eldorado.millelds.dao.OrderDAO
 import br.org.eldorado.millelds.databinding.ActivityCartBinding
 import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.ui.adapter.CartListAdapter
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
     private val binding by lazy {
@@ -56,8 +58,9 @@ class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
     }
 
     private fun completeOrder() {
-        if (!checkCartIsEmpty()){
+        if (!checkCartIsEmpty()) {
             val intent = Intent(this, OrderCompletedActivity::class.java)
+            OrderDAO().add(cartItems, Date().time)
             startActivity(intent)
             CartDAO().removeAll()
             finish()

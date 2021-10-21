@@ -9,4 +9,8 @@
         android:title="@string/cart"
         app:showAsAction="always"
         android:contentDescription="@string/cart" />
+
+    <item
+        android:id="@+id/pastOrdersItem"
+        android:title="@string/orders_history" />
 </menu>

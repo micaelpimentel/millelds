@@ -43,8 +43,17 @@ class MainActivity : AppCompatActivity() {
                 openShoppingCart()
                 true
             }
+            R.id.pastOrdersItem -> {
+                openOrdersHistory()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun openOrdersHistory() {
+        val intent = Intent(this, OrdersActivity::class.java)
+        startActivity(intent)
     }
 
     private fun openShoppingCart() {

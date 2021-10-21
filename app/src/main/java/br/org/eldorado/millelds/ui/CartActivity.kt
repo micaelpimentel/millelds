@@ -59,7 +59,7 @@ class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
 
     private fun completeOrder() {
         if (!checkCartIsEmpty()) {
-            val intent = Intent(this, OrderCompletedActivity::class.java)
+            val intent = Intent(this, OrdersActivity::class.java)
             OrderDAO().add(cartItems, Date().time)
             startActivity(intent)
             CartDAO().removeAll()

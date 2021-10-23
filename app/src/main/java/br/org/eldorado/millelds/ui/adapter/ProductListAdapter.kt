@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.org.eldorado.millelds.databinding.ListItemBinding
 import br.org.eldorado.millelds.extensions.formatCurrencyToBr
+import br.org.eldorado.millelds.extensions.setupProductImage
 import br.org.eldorado.millelds.extensions.tryLoadImage
 import br.org.eldorado.millelds.model.Product
 import java.math.BigDecimal
@@ -33,16 +34,7 @@ class ProductListAdapter(
                 productNameTextView.text = product.name
                 productDescriptionTextView.text = product.description ?: ""
                 productPriceTextView.text = product.price.formatCurrencyToBr()
-                setupProductImage(product.imageUrl)
-            }
-        }
-
-        private fun setupProductImage(imageUrl: String?) {
-            if (imageUrl != null) {
-                listItemBinding.productImageView.visibility = View.VISIBLE
-                listItemBinding.productImageView.tryLoadImage(imageUrl)
-            } else {
-                listItemBinding.productImageView.visibility = View.GONE
+                productImageView.setupProductImage(product.imageUrl)
             }
         }
     }

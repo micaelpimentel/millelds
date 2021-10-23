@@ -3,6 +3,7 @@ package br.org.eldorado.millelds.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.org.eldorado.millelds.R
+import br.org.eldorado.millelds.dao.CartDAO
 import br.org.eldorado.millelds.databinding.ActivityProductDetailBinding
 import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.extensions.tryLoadImage
@@ -16,6 +17,8 @@ class ProductDetailActivity : AppCompatActivity() {
         ActivityProductDetailBinding.inflate(layoutInflater)
     }
 
+    private lateinit var product: Product
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -23,7 +26,8 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun tryGetProduct() {
-        intent.getParcelableExtra<Product>(PRODUCT_TAG)?.let { product ->
+        intent.getParcelableExtra<Product>(PRODUCT_TAG)?.let {
+            product = it
             setupViews(product)
         } ?: finish()
     }
@@ -40,6 +44,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private fun setupFab(product: Product) {
         binding.floatingActionButton.setOnClickListener {
+            CartDAO().add(product)
             Snackbar.make(
                 binding.root,
                 "${product.name} adicionado ao carrinho",

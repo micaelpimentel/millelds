@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.org.eldorado.millelds.dao.CartDAO
 import br.org.eldorado.millelds.databinding.CartItemBinding
+import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.extensions.setupProductImage
 import br.org.eldorado.millelds.model.CartItem
 
@@ -26,7 +27,7 @@ class CartListAdapter(
             with(itemBinding) {
                 productNameTextView.text = cartItem.product.name
                 amountCounter.setText(cartItem.amount.toString())
-                productPriceTextView.text = cartItem.getSubTotal()
+                productPriceTextView.text = cartItem.getSubTotal().formatCurrencyToBr()
                 productImageView.setupProductImage(cartItem.product.imageUrl)
                 increase.setOnClickListener { increaseCount() }
                 decrease.setOnClickListener { decreaseCount() }
@@ -48,7 +49,7 @@ class CartListAdapter(
         fun displayCount(amount: Int) {
             itemBinding.amountCounter.setText(amount.toString())
             cartItem.amount = amount
-            itemBinding.productPriceTextView.text = cartItem.getSubTotal()
+            itemBinding.productPriceTextView.text = cartItem.getSubTotal().formatCurrencyToBr()
             if (amount == 0) {
                 cartList.removeAt(adapterPosition)
                 CartDAO().remove(adapterPosition)

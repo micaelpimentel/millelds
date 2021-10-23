@@ -6,5 +6,5 @@ import java.util.*
 
 fun BigDecimal.formatCurrencyToBr(): String {
     val formatter = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
-    return formatter.format(this)
+    return formatter.format(this).replace("R$", "R$ ")
 }

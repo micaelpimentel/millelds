@@ -13,4 +13,13 @@
     <string name="cart">Carrinho</string>
     <string name="seu_carrinho_est_vazio">Seu carrinho está vazio</string>
     <string name="total_cart_price">Total: %s</string>
+    <string name="complete_order">Fechar pedido</string>
+    <string name="order_completed_success">Pedido finalizado com sucesso!</string>
+    <string name="order_number_title">Pedido #%s</string>
+    <string name="quantity">Itens:</string>
+    <string name="total">Total:</string>
+    <string name="details">Detalhes</string>
+    <string name="concluded">Concluído</string>
+    <string name="orders_history">Histórico de pedidos</string>
+    <string name="no_past_orders">Você ainda não fez\n nenhum pedido.</string>
 </resources>

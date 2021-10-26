@@ -7,8 +7,8 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import br.org.eldorado.millelds.R
-import br.org.eldorado.millelds.dao.CartDAO
-import br.org.eldorado.millelds.dao.OrderDAO
+import br.org.eldorado.millelds.database.dao.CartDAO
+import br.org.eldorado.millelds.database.dao.OrderDAO
 import br.org.eldorado.millelds.databinding.ActivityCartBinding
 import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.ui.adapter.CartListAdapter

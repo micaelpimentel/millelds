@@ -3,11 +3,8 @@ package br.org.eldorado.millelds.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import br.org.eldorado.millelds.R
-import br.org.eldorado.millelds.dao.OrderDAO
-import br.org.eldorado.millelds.databinding.ActivityCartBinding
+import br.org.eldorado.millelds.database.dao.OrderDAO
 import br.org.eldorado.millelds.databinding.ActivityOrdersBinding
-import br.org.eldorado.millelds.ui.adapter.CartListAdapter
 import br.org.eldorado.millelds.ui.adapter.OrdersListAdapter
 
 class OrdersActivity : AppCompatActivity() {

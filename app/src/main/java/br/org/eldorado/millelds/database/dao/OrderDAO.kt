@@ -1,4 +1,4 @@
-package br.org.eldorado.millelds.dao
+package br.org.eldorado.millelds.database.dao
 
 import br.org.eldorado.millelds.model.CartItem
 import br.org.eldorado.millelds.model.Order

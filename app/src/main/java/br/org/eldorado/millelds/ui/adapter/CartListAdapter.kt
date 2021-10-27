@@ -3,7 +3,7 @@ package br.org.eldorado.millelds.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.org.eldorado.millelds.dao.CartDAO
+import br.org.eldorado.millelds.database.dao.CartDAO
 import br.org.eldorado.millelds.databinding.CartItemBinding
 import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.extensions.setupProductImage

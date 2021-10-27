@@ -2,8 +2,7 @@ package br.org.eldorado.millelds.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import br.org.eldorado.millelds.R
-import br.org.eldorado.millelds.dao.CartDAO
+import br.org.eldorado.millelds.database.dao.CartDAO
 import br.org.eldorado.millelds.databinding.ActivityProductDetailBinding
 import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.extensions.tryLoadImage

@@ -2,14 +2,17 @@ package br.org.eldorado.millelds.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import br.org.eldorado.millelds.R
-import br.org.eldorado.millelds.dao.ProductDAO
+import br.org.eldorado.millelds.database.MainDataBase
+import br.org.eldorado.millelds.database.dao.ProductDAO
 import br.org.eldorado.millelds.databinding.ActivityMainBinding
+import br.org.eldorado.millelds.model.Product
 import br.org.eldorado.millelds.ui.adapter.ProductListAdapter
 import java.util.*
 
@@ -19,11 +22,17 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private val productList = ProductDAO().getAll().toMutableList()
+    private lateinit var productDAO: ProductDAO
+
+    private lateinit var productList: MutableList<Product>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        productDAO = MainDataBase.getInstance(this).getProductDao()
+        productList = productDAO.getAll().toMutableList()
+
         setupViews()
     }
 
@@ -63,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateProductList() {
         productList.clear()
-        productList.addAll(ProductDAO().getAll().toMutableList())
+        productList.addAll(productDAO.getAll())
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 
@@ -107,7 +116,6 @@ class MainActivity : AppCompatActivity() {
             ): Boolean {
                 val startingPosition = viewHolder.adapterPosition
                 val endingPosition = target.adapterPosition
-                ProductDAO().swap(startingPosition, endingPosition)
                 Collections.swap(productList, startingPosition, endingPosition)
                 binding.recyclerView.adapter?.notifyItemMoved(startingPosition, endingPosition)
                 return true
@@ -115,7 +123,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                ProductDAO().remove(position)
+                productDAO.delete(productList[position])
                 productList.removeAt(position)
                 binding.recyclerView.adapter?.notifyItemRemoved(position)
             }

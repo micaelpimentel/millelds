@@ -6,6 +6,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import br.org.eldorado.millelds.R
 import br.org.eldorado.millelds.database.dao.CartDAO
 import br.org.eldorado.millelds.database.dao.OrderDAO
@@ -39,6 +41,7 @@ class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
             binding.cartListRecyclerView.apply {
                 adapter = CartListAdapter(cartItems, this@CartActivity)
             }
+            setupItemTouchHelper().attachToRecyclerView(binding.cartListRecyclerView)
         }
     }
 
@@ -98,5 +101,35 @@ class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
     override fun updateTotalPriceTextView() {
         setupTotalPrice()
         checkCartIsEmpty()
+    }
+
+    private fun setupItemTouchHelper(): ItemTouchHelper {
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
+            override fun getMovementFlags(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ): Int {
+                val swipeFlags = ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT
+                val dragFlags = ItemTouchHelper.DOWN or ItemTouchHelper.UP
+                return makeMovementFlags(0, swipeFlags)
+            }
+
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                CartDAO().remove(position)
+                cartItems.removeAt(position)
+                binding.cartListRecyclerView.adapter?.notifyItemRemoved(position)
+                updateTotalPriceTextView()
+            }
+        })
+        return itemTouchHelper
     }
 }

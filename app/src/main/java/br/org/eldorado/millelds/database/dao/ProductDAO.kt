@@ -1,7 +1,6 @@
 package br.org.eldorado.millelds.database.dao
 
 import androidx.room.*
-import br.org.eldorado.millelds.database.entities.ProductEntity
 import br.org.eldorado.millelds.model.Product
 import java.util.*
 

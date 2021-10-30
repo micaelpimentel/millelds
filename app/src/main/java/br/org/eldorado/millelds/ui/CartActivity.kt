@@ -14,6 +14,7 @@ import br.org.eldorado.millelds.database.dao.OrderDAO
 import br.org.eldorado.millelds.databinding.ActivityCartBinding
 import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.ui.adapter.CartListAdapter
+import br.org.eldorado.millelds.ui.dialog.ConfirmDeleteDialog
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
@@ -124,10 +125,17 @@ class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                CartDAO().remove(position)
-                cartItems.removeAt(position)
-                binding.cartListRecyclerView.adapter?.notifyItemRemoved(position)
-                updateTotalPriceTextView()
+                ConfirmDeleteDialog(this@CartActivity)
+                    .onPositive {
+                        CartDAO().remove(position)
+                        cartItems.removeAt(position)
+                        binding.cartListRecyclerView.adapter?.notifyItemRemoved(position)
+                        updateTotalPriceTextView()
+                    }
+                    .onNegative {
+                        binding.cartListRecyclerView.adapter?.notifyItemChanged(position)
+                    }
+                    .show()
             }
         })
         return itemTouchHelper

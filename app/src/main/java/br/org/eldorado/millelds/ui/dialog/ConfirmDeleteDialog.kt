@@ -12,21 +12,21 @@ class ConfirmDeleteDialog(private val context: Context) {
         this.alertBuilder.show()
     }
 
-    fun onPositive(onPositveHandler: ()->Unit): ConfirmDeleteDialog {
+    fun onPositive(onPositiveHandler: ()->Unit): ConfirmDeleteDialog {
         this.alertBuilder
-            .setPositiveButton("Configmar") { _, _ ->
-                onPositveHandler()
+            .setPositiveButton("Confirmar") { _, _ ->
+                onPositiveHandler()
             }
         return this
     }
 
-    fun onNegative(onNegaviteHandler: () -> Unit): ConfirmDeleteDialog {
+    fun onNegative(onNegativeHandler: () -> Unit): ConfirmDeleteDialog {
         this.alertBuilder
             .setNegativeButton("Nao") { _, _ ->
-                onNegaviteHandler()
+                onNegativeHandler()
             }
             .setOnCancelListener {
-                onNegaviteHandler()
+                onNegativeHandler()
             }
         return this
     }

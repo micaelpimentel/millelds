@@ -5,9 +5,7 @@ import br.org.eldorado.millelds.model.Product
 import java.util.*
 
 class CartDAO {
-    companion object {
-        private val cartItems = mutableListOf<CartItem>()
-    }
+    private val cartItems = mutableListOf<CartItem>()
 
     fun add(product: Product) {
         val foundIndex = cartItems.indexOf(product)

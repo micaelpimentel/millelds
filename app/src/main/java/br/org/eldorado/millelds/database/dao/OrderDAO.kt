@@ -4,9 +4,7 @@ import br.org.eldorado.millelds.model.CartItem
 import br.org.eldorado.millelds.model.Order
 
 class OrderDAO {
-    companion object {
-        private val orders = mutableListOf<Order>()
-    }
+    private val orders = mutableListOf<Order>()
 
     fun add(order: Order) = orders.add(order)
 

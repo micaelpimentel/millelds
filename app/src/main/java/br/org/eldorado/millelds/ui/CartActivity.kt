@@ -16,6 +16,7 @@ import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.ui.adapter.CartListAdapter
 import br.org.eldorado.millelds.ui.dialog.ConfirmDeleteDialog
 import com.google.android.material.snackbar.Snackbar
+import org.koin.android.ext.android.inject
 import java.util.*
 
 class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
@@ -23,7 +24,10 @@ class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
         ActivityCartBinding.inflate(layoutInflater)
     }
 
-    private val cartItems = CartDAO().getAll().toMutableList()
+    private val orderDao: OrderDAO by inject()
+    private val cartDao: CartDAO by inject()
+
+    private val cartItems = cartDao.getAll().toMutableList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,9 +68,9 @@ class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
     private fun completeOrder() {
         if (!checkCartIsEmpty()) {
             val intent = Intent(this, OrderCompletedActivity::class.java)
-            OrderDAO().add(cartItems, Date().time)
+            orderDao.add(cartItems, Date().time)
             startActivity(intent)
-            CartDAO().removeAll()
+            cartDao.removeAll()
             finish()
         } else {
             Snackbar.make(
@@ -127,7 +131,7 @@ class CartActivity : AppCompatActivity(), CartListAdapter.UpdateTotalPrice {
                 val position = viewHolder.adapterPosition
                 ConfirmDeleteDialog(this@CartActivity)
                     .onPositive {
-                        CartDAO().remove(position)
+                        cartDao.remove(position)
                         cartItems.removeAt(position)
                         binding.cartListRecyclerView.adapter?.notifyItemRemoved(position)
                         updateTotalPriceTextView()

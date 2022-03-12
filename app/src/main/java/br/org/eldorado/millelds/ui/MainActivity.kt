@@ -14,6 +14,7 @@ import br.org.eldorado.millelds.database.dao.ProductDAO
 import br.org.eldorado.millelds.databinding.ActivityMainBinding
 import br.org.eldorado.millelds.model.Product
 import br.org.eldorado.millelds.ui.adapter.ProductListAdapter
+import org.koin.android.ext.android.inject
 import java.util.*
 
 
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private lateinit var productDAO: ProductDAO
+    private val productDAO: ProductDAO by inject()
 
     private lateinit var productList: MutableList<Product>
 
@@ -30,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        productDAO = MainDataBase.getInstance(this).getProductDao()
         productList = productDAO.getAll().toMutableList()
 
         setupViews()

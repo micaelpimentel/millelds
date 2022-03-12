@@ -10,6 +10,7 @@ import br.org.eldorado.millelds.extensions.tryLoadImage
 import br.org.eldorado.millelds.model.Product
 import br.org.eldorado.millelds.ui.dialog.ImageFormDialog
 import com.google.android.material.snackbar.Snackbar
+import org.koin.android.ext.android.inject
 import java.math.BigDecimal
 
 class ProductAddActivity : AppCompatActivity() {
@@ -17,7 +18,7 @@ class ProductAddActivity : AppCompatActivity() {
         ActivityProductAddBinding.inflate(layoutInflater)
     }
 
-    private lateinit var productDAO: ProductDAO
+    private val productDAO: ProductDAO by inject()
 
     private var url: String? = null
 
@@ -25,7 +26,6 @@ class ProductAddActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         title = getString(R.string.new_product)
-        productDAO = MainDataBase.getInstance(this).getProductDao()
         setupButton()
         setupImage()
     }

@@ -1,15 +1,23 @@
 package br.org.eldorado.millelds.application
 
 import android.app.Application
-import br.org.eldorado.millelds.database.MainDataBase
+import br.org.eldorado.millelds.database.dao.ProductDAO
+import br.org.eldorado.millelds.di.appModule
 import br.org.eldorado.millelds.model.Product
+import org.koin.android.BuildConfig
+import org.koin.android.ext.android.inject
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 
 class MilleldsApplication : Application() {
 
+    val productDao: ProductDAO by inject()
+
     override fun onCreate() {
         super.onCreate()
-        val dataBase = MainDataBase.getInstance(applicationContext)
-        val productDao = dataBase.getProductDao()
+        setupKoin()
 
         productDao.add(
             Product(
@@ -41,5 +49,13 @@ class MilleldsApplication : Application() {
                 imageUrl = "https://static1.conquistesuavida.com.br/articles//2/72/22/@/23017-as-frutas-citricas-sao-caracterizadas-pe-article_gallery-3.jpg"
             )
         )
+    }
+
+    private fun setupKoin() {
+        startKoin {
+            androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
+            androidContext(this@MilleldsApplication)
+            modules(appModule)
+        }
     }
 }

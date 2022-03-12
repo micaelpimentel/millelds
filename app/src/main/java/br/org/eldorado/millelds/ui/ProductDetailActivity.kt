@@ -8,10 +8,12 @@ import br.org.eldorado.millelds.extensions.formatCurrencyToBr
 import br.org.eldorado.millelds.extensions.tryLoadImage
 import br.org.eldorado.millelds.model.Product
 import com.google.android.material.snackbar.Snackbar
+import org.koin.android.ext.android.inject
 
 const val PRODUCT_TAG = "product_tag"
 
 class ProductDetailActivity : AppCompatActivity() {
+    private val cartDao: CartDAO by inject()
     private val binding by lazy {
         ActivityProductDetailBinding.inflate(layoutInflater)
     }
@@ -43,7 +45,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private fun setupFab(product: Product) {
         binding.floatingActionButton.setOnClickListener {
-            CartDAO().add(product)
+            cartDao.add(product)
             Snackbar.make(
                 binding.root,
                 "${product.name} adicionado ao carrinho",
